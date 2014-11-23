@@ -1,5 +1,10 @@
 <% include _header.ejs %>
 
-
+EnFusion:
+<form action="/build" method="POST">
+	<input type="hidden" name="user" value="shadowfacts">
+	<input type="hidden" name="repo" value="enfusion">
+	<input type="submit" value="Build!">
+</form>
 
 <% include _footer.ejs %>

@@ -16,8 +16,7 @@
 		"morgan": "*",
 		"serve-favicon": "*",
 		"body-parser": "*",
-		"multer": "*",
-		"nodegit": "*"
+		"multer": "*"
 	},
 	"engines": {
 		"node": "0.10.*"
