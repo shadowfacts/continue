@@ -1,0 +1,19 @@
+<% include _header.ejs %>
+
+<pre class="logs"></pre>
+
+
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+	var socket = io();
+	socket.on('log', function(data) {
+		if (data.repo = 'shadowfacts/enfusion') {
+			$(document).ready(function() {
+				$('.logs').text(data.logs);
+			});
+		}
+	});
+</script>
+
+<% include _footer.ejs %>

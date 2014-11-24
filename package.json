@@ -16,7 +16,8 @@
 		"morgan": "*",
 		"serve-favicon": "*",
 		"body-parser": "*",
-		"multer": "*"
+		"multer": "*",
+		"socket.io": "1.*.*"
 	},
 	"engines": {
 		"node": "0.10.*"

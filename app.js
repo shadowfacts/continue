@@ -13,15 +13,19 @@
 var path = require('path'),
 	fs = require('fs'),
 	exec = require('child_process').exec,
+	http = require('http'),
 	express = require('express'),
 	morgan = require('morgan'),
 	favicon = require('serve-favicon'),
 	bodyParser = require('body-parser'),
 	multer = require('multer'),
-	git = require('nodegit');
+	git = require('nodegit')
+	socketio = require('socket.io');
 
 // The App!
 var app = express();
+var server = http.Server(app);
+var socket = socketio(server);
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -44,11 +48,24 @@ app.post('/build', function(req, res) {
 	var githubPath = 'git://github.com/' + req.param('user') + '/' + req.param('repo') + '.git';
 	git.Clone.clone(githubPath, localPath).then(function(repo) {
 		var buildPath = path.join(__dirname, 'build', req.param('user'), req.param('repo'));
+		// console.log(logPath);
 		var buildScript = 'cd ' + buildPath + '; git submodule init; git submodule update; chmod +x ./gradlew; ./gradlew clean setupCIWorkSpace build;';
-		res.end();
+		// console.log('hello');
+		res.render('building', { title: req.param('repo') + ' | Continue', repo: req.param('user') + '/' + req.param('repo') });
 		var child = exec(buildScript, function(err, stdout, stderr) {
-			if (err == null) {
-				console.log('Yay! Build finished!');
+			if (!err) {
+				console.log(req.param('user') + '/' + req.param('repo'), ' build finished: successful');
+				// TODO: Archive build artifacts
+				var log = path.join(__dirname, 'logs', req.param('user'), req.param('repo') + '.txt');
+				fs.writeFile(log, stdout, function(err) {
+					if (err) console.error(err);
+				});
+
+				socket.emit('log', { repo: req.param('user') + '/' + req.param('repo'), logs: stdout.toString() });
+
+			} else {
+				console.log(req.param('user') + '/' + req.param('repo'), ' build finished: failed');
+				console.error(err);
 			}
 		});
 	});
@@ -57,5 +74,8 @@ app.post('/build', function(req, res) {
 
 
 // Start web server
-console.log('Continue starting on port ' + app.get('port'));
-app.listen(app.get('port'));
+// console.log('Continue starting on port ' + app.get('port'));
+// app.listen(app.get('port'));
+server.listen(app.get('port'), function() {
+	console.log('Continue starting on port ' + app.get('port'));
+});

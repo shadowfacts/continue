@@ -1,0 +1,69 @@
+Submodule 'ShadowCore' (https://github.com/shadowfacts/ShadowCore.git) registered for path 'ShadowCore'
+Submodule path 'ShadowCore': checked out '9cd3ffd37d144135b87e4e3d39296798e836bf22'
+****************************
+ Powered By MCP:             
+ http://mcp.ocean-labs.de/   
+ Searge, ProfMobius, Fesh0r, 
+ R4wk, ZeuX, IngisKahn, bspkrs
+ MCP Data version : unknown
+****************************
+:clean
+:ShadowCore:clean
+:downloadClient SKIPPED
+:downloadServer SKIPPED
+:getVersionJson
+:extractUserDev
+:mergeJars SKIPPED
+:applyBinPatches SKIPPED
+:downloadMcpTools SKIPPED
+:extractMcpData
+:genSrgs SKIPPED
+:deobfBinJar SKIPPED
+:setupCIWorkspace UP-TO-DATE
+:ShadowCore:downloadClient SKIPPED
+:ShadowCore:downloadServer SKIPPED
+:ShadowCore:getVersionJson
+:ShadowCore:extractUserDev
+:ShadowCore:mergeJars SKIPPED
+:ShadowCore:applyBinPatches SKIPPED
+:ShadowCore:downloadMcpTools SKIPPED
+:ShadowCore:extractMcpData
+:ShadowCore:genSrgs SKIPPED
+:ShadowCore:deobfBinJar SKIPPED
+:ShadowCore:setupCIWorkspace UP-TO-DATE
+:ShadowCore:compileApiJava UP-TO-DATE
+:ShadowCore:processApiResources UP-TO-DATE
+:ShadowCore:apiClasses UP-TO-DATE
+:ShadowCore:sourceMainJava
+:ShadowCore:compileJava
+:ShadowCore:processResources
+:ShadowCore:classes
+:ShadowCore:jar
+:compileApiJava
+:processApiResources UP-TO-DATE
+:apiClasses
+:sourceMainJava
+:compileJava
+:processResources
+:classes
+:jar
+:compileTestJava UP-TO-DATE
+:processTestResources UP-TO-DATE
+:testClasses UP-TO-DATE
+:test UP-TO-DATE
+:reobf
+:assemble
+:check UP-TO-DATE
+:build
+:ShadowCore:compileTestJava UP-TO-DATE
+:ShadowCore:processTestResources UP-TO-DATE
+:ShadowCore:testClasses UP-TO-DATE
+:ShadowCore:test UP-TO-DATE
+:ShadowCore:reobf
+:ShadowCore:assemble
+:ShadowCore:check UP-TO-DATE
+:ShadowCore:build
+
+BUILD SUCCESSFUL
+
+Total time: 32.337 secs
