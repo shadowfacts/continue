@@ -56,11 +56,6 @@ app.post('/build', function(req, res) {
 			if (!err) {
 				console.log(req.param('user') + '/' + req.param('repo'), ' build finished: successful');
 				// TODO: Archive build artifacts
-				var log = path.join(__dirname, 'logs', req.param('user'), req.param('repo') + '.txt');
-				fs.writeFile(log, stdout, function(err) {
-					if (err) console.error(err);
-				});
-
 				socket.emit('log', { repo: req.param('user') + '/' + req.param('repo'), logs: stdout.toString() });
 
 			} else {
