@@ -19,7 +19,7 @@ var path = require('path'),
 	favicon = require('serve-favicon'),
 	bodyParser = require('body-parser'),
 	multer = require('multer'),
-	git = require('nodegit')
+	git = require('nodegit'),
 	socketio = require('socket.io');
 
 // The App!
