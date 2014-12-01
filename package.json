@@ -17,7 +17,8 @@
 		"serve-favicon": "*",
 		"body-parser": "*",
 		"multer": "*",
-		"socket.io": "1.*.*"
+		"socket.io": "1.*.*",
+		"node-regexp": "*"
 	},
 	"engines": {
 		"node": "0.10.*"

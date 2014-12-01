@@ -20,7 +20,8 @@ var path = require('path'),
 	bodyParser = require('body-parser'),
 	multer = require('multer'),
 	git = require('nodegit'),
-	socketio = require('socket.io');
+	socketio = require('socket.io'),
+	regexp = require('node-regexp');
 
 // The App!
 var app = express();
@@ -54,8 +55,34 @@ app.post('/build', function(req, res) {
 		res.render('building', { title: req.param('repo') + ' | Continue', repo: req.param('user') + '/' + req.param('repo') });
 		var child = exec(buildScript, function(err, stdout, stderr) {
 			if (!err) {
+				// Log build finishing
 				console.log(req.param('user') + '/' + req.param('repo'), ' build finished: successful');
+				
 				// TODO: Archive build artifacts
+				var artifactPath = path.join(__dirname, 'build', req.param('user'), req.param('repo'), 'build', 'libs');
+				// to archive = *.jar
+				fs.readdir(artifactPath, function(err, files) {
+					if (!err) {
+						var regex  = new regexp();
+						regex.end('.jar').ignoreCase().toRegExp();
+						for (var i = 0; i < files.length; i++) {
+							// if (regex.test(files[i])) {
+							if (files[i].match(regex)) {
+								var oldPath = path.join(artifactPath, files[i]);
+								var newPath = path.join(__dirname, 'artifacts', req.param('user'), req.param('repo'), files[i]);
+								fs.rename(oldPath, newPath, function(err) {
+									if (!err) {
+										console.log('Artifact for ' + req.param('user') + '/' + req.param('repo') + ' successfully archived');
+									} else {
+										console.error(err);
+									}
+								});
+							}
+						}
+					}
+				});
+
+				// Send logs to client
 				socket.emit('log', { repo: req.param('user') + '/' + req.param('repo'), logs: stdout.toString() });
 
 			} else {
